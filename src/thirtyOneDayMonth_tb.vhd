@@ -11,8 +11,8 @@
 --| ---------------------------------------------------------------------------
 --|
 --| FILENAME      : thirtyOneDayMonth_tb.vhd (TEST BENCH)
---| AUTHOR(S)     : Capt Dan Johnson, ***Your Name Here***
---| CREATED       : 12/12/2019 Last Modified 06/24/2020
+--| AUTHOR(S)     : Capt Dan Johnson, Michael Ulery
+--| CREATED       : 12/12/2019 Last Modified 02/05/2026
 --| DESCRIPTION   : This file tests to ensure thirtyOneDayMonthMux works properly
 --|
 --|
@@ -76,10 +76,10 @@ begin
 	-- PORT MAPS ----------------------------------------
 	-- map ports for any component instances (port mapping is like wiring hardware)
     thirtyOneDayMonthMux_inst : thirtyOneDayMonth port map (
-			i_D => w_sw(3),
-			i_C => w_sw(2),
-			i_B => w_sw(1),
-			i_A => w_sw(0),
+			i_D => w_sw(0),
+			i_C => w_sw(1),
+			i_B => w_sw(2),
+			i_A => w_sw(3),
 	    		o_Y => w_Y
         );
 	-----------------------------------------------------
@@ -90,10 +90,32 @@ begin
 	test_process : process 
 	begin
 	-- Place test cases here. The first two have been written for you
-		w_sw <= x"0"; wait for 10 ns;
+		w_sw <= "0000"; wait for 2 ns;
             assert w_Y = '0' report "error on x0" severity failure;
-        w_sw <= x"1"; wait for 10 ns;
-            assert w_Y = '1' report "error on Jan" severity failure;   
+        w_sw <= "0001"; wait for 10 ns;
+            assert w_Y = '1' report "error on Jan" severity failure; 
+        w_sw <= "0010"; wait for 10 ns;
+            assert w_Y = '0' report "error on Feb" severity failure; 
+        w_sw <= "0011"; wait for 10 ns;
+            assert w_Y = '1' report "error on Mar" severity failure; 
+        w_sw <= "0100"; wait for 10 ns;
+            assert w_Y = '0' report "error on Apr" severity failure; 
+        w_sw <= "0101"; wait for 10 ns;
+            assert w_Y = '1' report "error on May" severity failure; 
+        w_sw <= "0110"; wait for 10 ns;
+            assert w_Y = '0' report "error on Jun" severity failure;  
+        w_sw <= "0111"; wait for 10 ns;
+            assert w_Y = '1' report "error on Jul" severity failure;
+        w_sw <= "1000"; wait for 10 ns;
+            assert w_Y = '1' report "error on Aug" severity failure;    
+        w_sw <= "1001"; wait for 10 ns;
+            assert w_Y = '0' report "error on Sep" severity failure;  
+        w_sw <= "1010"; wait for 10 ns;
+            assert w_Y = '1' report "error on Oct" severity failure; 
+        w_sw <= "1011"; wait for 10 ns;
+            assert w_Y = '0' report "error on Nov" severity failure;   
+        w_sw <= "1100"; wait for 10 ns;
+            assert w_Y = '1' report "error on Dec" severity failure; 
 
 		wait; -- wait forever
 	end process;	
